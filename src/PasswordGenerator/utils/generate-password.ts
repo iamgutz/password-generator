@@ -68,4 +68,29 @@ const generatePassword = ({
   return shufflePassword(password).slice(0, length);
 };
 
+export const strengthScore = (password: string): string => {
+  let score = '';
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  const hasSymbol = /[!@#$%^&*()-_=+[\]{}|;:,.<>?/]/.test(password);
+
+  const passes = [hasUppercase, hasLowercase, hasNumber, hasSymbol];
+
+  const falseCount = passes.filter(value => value === false).length;
+  if (falseCount >= 2) {
+    score = 'weak';
+  } else if (falseCount === 1) {
+    score = 'medium';
+  } else {
+    score = 'strong';
+  }
+
+  if (password.length < 8) {
+    score = 'short';
+  }
+
+  return score;
+};
+
 export default generatePassword;
