@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './App.css';
 import Paper from './components/Paper';
 import generatePassword from './utils/generate-password';
@@ -16,6 +17,7 @@ function App() {
     ...options,
   });
   const [password, setPassword] = useState(initialPassword);
+  const [wasCopied, setWasCopied] = useState(false);
 
   const handlePasswordLengthChange = (length: string) => {
     setPasswordLength(length);
@@ -28,10 +30,31 @@ function App() {
     }));
   };
 
+  const handleOnCopy = () => {
+    if (wasCopied) {
+      return;
+    }
+    setWasCopied(true);
+  };
+
   useEffect(() => {
     const newPassword = generatePassword({ length: parseInt(passwordLength, 10), ...options });
     setPassword(newPassword);
   }, [passwordLength, options]);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    if (wasCopied) {
+      timeout = setTimeout(() => {
+        setWasCopied(false);
+      }, 1500);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [wasCopied]);
 
   return (
     <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center">
@@ -83,7 +106,12 @@ function App() {
             className="text-black"
             value={password}
           />
-          <button type="button">Copy</button>
+          <CopyToClipboard
+            text={password}
+            onCopy={() => handleOnCopy()}
+          >
+            <button type="button">{wasCopied ? 'Copied!' : 'Copy'}</button>
+          </CopyToClipboard>
         </div>
       </Paper>
     </div>
