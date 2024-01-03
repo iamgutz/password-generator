@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Paper from '../components/Paper';
-import generatePassword, { strengthScore } from './utils/generate-password';
+import generatePassword, { strengthScore } from './utils';
 import { strengthConfig } from './constants';
 import { PasswordStrength } from './definitions';
 

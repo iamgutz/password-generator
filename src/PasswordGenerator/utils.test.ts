@@ -1,4 +1,4 @@
-import generatePassword from './generate-password';
+import generatePassword from './utils';
 
 describe('generatePassword', () => {
   it('generates a password with the specified length', () => {
