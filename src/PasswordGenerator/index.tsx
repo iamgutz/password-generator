@@ -7,8 +7,10 @@ import { PasswordStrength } from './definitions';
 import TextField from '../components/TextField';
 import PasswordDisplay from '../components/PasswordDisplay';
 import Checkbox from '../components/Checkbox';
+import Slider from '../components/Slider';
 
 export default function PasswordGenerator() {
+  const [sliderValue, setSliderValue] = useState(0);
   const [passwordLength, setPasswordLength] = useState('12');
   const [options, setOptions] = useState({
     uppercase: true,
@@ -102,6 +104,15 @@ export default function PasswordGenerator() {
           onChange={e => handlePasswordLengthChange(e.target.value)}
         />
       </div>
+
+      <Slider
+        minValue={3}
+        maxValue={50}
+        currentValue={parseInt(passwordLength, 10)}
+        onChange={handlePasswordLengthChange}
+      />
+
+      <p>{sliderValue}</p>
 
       <div className="px-4 pb-4 md:px-10 md:pb-10">
         <p>Include:</p>

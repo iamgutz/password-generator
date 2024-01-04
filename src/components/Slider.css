@@ -1,0 +1,32 @@
+.slider {
+  position: relative;
+  width: 300px;
+  height: 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.filled-background {
+  height: 100%;
+  background-color: #4caf50; /* Green color for the filled background */
+  transition: width 0.2s ease-out;
+  position: relative;
+}
+
+.knob {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #4caf50; /* Border color matching the filled background */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  cursor: grab;
+}
+
+.empty-background {
+  height: 100%;
+  background-color: #e0e0e0; /* Light gray color for the empty background */
+}
