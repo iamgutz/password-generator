@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Paper from '../components/Paper';
 import generatePassword, { optionsBoundary, strengthScore } from './utils';
 import { strengthConfig } from './constants';
