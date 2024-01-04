@@ -1,15 +1,5 @@
-interface PasswordOptions {
-  length: number;
-  uppercase?: boolean;
-  lowercase?: boolean;
-  numbers?: boolean;
-  symbols?: boolean;
-}
-
-const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-const NUMBERS = '0123456789';
-const SYMBOLS = '!@#$%^&*()-_=+[]{}|;:,.<>?/';
+import { LOWERCASE, NUMBERS, SYMBOLS, UPPERCASE } from './constants';
+import { PasswordOptions } from './definitions';
 
 const getRandomChar = (charset: string): string => {
   const randomIndex = Math.floor(Math.random() * charset.length);
@@ -91,6 +81,22 @@ export const strengthScore = (password: string): string => {
   }
 
   return score;
+};
+
+export const optionsBoundary = (options: {
+  uppercase: boolean;
+  lowercase: boolean;
+  numbers: boolean;
+  symbols: boolean;
+}) => {
+  const lowercase =
+    !options.uppercase && !options.lowercase && !options.numbers && !options.symbols
+      ? true
+      : options.lowercase;
+  return {
+    ...options,
+    lowercase,
+  };
 };
 
 export default generatePassword;

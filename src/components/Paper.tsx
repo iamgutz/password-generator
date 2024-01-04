@@ -4,7 +4,7 @@ interface PaperProps {
   children: ReactNode;
 }
 const Paper = ({ children }: PaperProps) => {
-  return <div className="bg-slate-900 p-4 md:p-10 text-slate-50">{children}</div>;
+  return <div className="bg-slate-900 text-slate-50 rounded-lg">{children}</div>;
 };
 
 export default Paper;

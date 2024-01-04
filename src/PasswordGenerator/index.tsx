@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Paper from '../components/Paper';
-import generatePassword, { strengthScore } from './utils';
+import generatePassword, { optionsBoundary, strengthScore } from './utils';
 import { strengthConfig } from './constants';
 import { PasswordStrength } from './definitions';
+import TextField from '../components/TextField';
+import PasswordDisplay from '../components/PasswordDisplay';
+import Checkbox from '../components/Checkbox';
 
 export default function PasswordGenerator() {
   const [passwordLength, setPasswordLength] = useState('12');
@@ -22,7 +25,14 @@ export default function PasswordGenerator() {
   const strength = strengthConfig[strengthScore(password) as PasswordStrength];
 
   const handlePasswordLengthChange = (length: string) => {
-    setPasswordLength(length);
+    const lengthNumber = parseInt(length, 10);
+    let limitedLength = length;
+    if (lengthNumber <= 2) {
+      limitedLength = '3';
+    } else if (lengthNumber >= 51) {
+      limitedLength = '50';
+    }
+    setPasswordLength(limitedLength);
   };
 
   const handleOptionsChange = (optionName: string, value: boolean) => {
@@ -39,10 +49,17 @@ export default function PasswordGenerator() {
     setWasCopied(true);
   };
 
-  useEffect(() => {
-    const newPassword = generatePassword({ length: parseInt(passwordLength, 10), ...options });
+  const refreshPassword = useCallback(() => {
+    const newPassword = generatePassword({
+      length: parseInt(passwordLength, 10),
+      ...optionsBoundary(options),
+    });
     setPassword(newPassword);
-  }, [passwordLength, options]);
+  }, [options, passwordLength]);
+
+  useEffect(() => {
+    refreshPassword();
+  }, [refreshPassword]);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -60,12 +77,25 @@ export default function PasswordGenerator() {
 
   return (
     <Paper>
-      <h1 className="text-3xl font-bold text-center">Password Generator</h1>
-      <p className="text-center">Create a strong and secure password</p>
+      <div className="px-4 pt-4 pb-2 md:px-10 md:pt-10">
+        <h1 className="text-3xl font-bold text-center">Password Generator</h1>
+        <p className="text-center">Create a strong and secure password</p>
+      </div>
 
-      <div className="my-3">
+      <PasswordDisplay
+        password={password}
+        bgColorClass={strength.bgColorClass}
+        textColorClass={strength.textColorClass}
+        highlightColorClass={strength.highlightColorClass}
+        label={strength.label}
+        Icon={strength.icon}
+        onCopy={handleOnCopy}
+        onRefresh={refreshPassword}
+      />
+
+      <div className="px-4 md:px-10 my-3">
         <p>Password Length:</p>
-        <input
+        <TextField
           type="number"
           className="text-black"
           value={passwordLength}
@@ -73,49 +103,36 @@ export default function PasswordGenerator() {
         />
       </div>
 
-      <div>
+      <div className="px-4 pb-4 md:px-10 md:pb-10">
         <p>Include:</p>
-        <label>Uppercase</label>
-        <input
-          type="checkbox"
-          checked={options.uppercase}
-          onChange={e => handleOptionsChange('uppercase', e.target.checked)}
-        />
-        <label>Lowercase</label>
-        <input
-          type="checkbox"
-          checked={options.lowercase}
-          onChange={e => handleOptionsChange('lowercase', e.target.checked)}
-        />
-        <label>Numbers</label>
-        <input
-          type="checkbox"
-          checked={options.numbers}
-          onChange={e => handleOptionsChange('numbers', e.target.checked)}
-        />
-        <label>Symbols</label>
-        <input
-          type="checkbox"
-          checked={options.symbols}
-          onChange={e => handleOptionsChange('symbols', e.target.checked)}
-        />
-      </div>
-
-      <div className="my-3">
-        <input
-          type="text"
-          className="text-black"
-          value={password}
-        />
-        <p className={`${strength.colorClass}`}>
-          <strong>{strength.label || ''}</strong>
-        </p>
-        <CopyToClipboard
-          text={password}
-          onCopy={() => handleOnCopy()}
-        >
-          <button type="button">{wasCopied ? 'Copied!' : 'Copy'}</button>
-        </CopyToClipboard>
+        <div className="flex items-center my-2">
+          <Checkbox
+            checked={options.uppercase}
+            onChange={e => handleOptionsChange('uppercase', e.target.checked)}
+          />
+          <label className="ml-3">Uppercase (ABC)</label>
+        </div>
+        <div className="flex items-center my-2">
+          <Checkbox
+            checked={options.lowercase}
+            onChange={e => handleOptionsChange('lowercase', e.target.checked)}
+          />
+          <label className="ml-3">Lowercase (abc)</label>
+        </div>
+        <div className="flex items-center my-2">
+          <Checkbox
+            checked={options.numbers}
+            onChange={e => handleOptionsChange('numbers', e.target.checked)}
+          />
+          <label className="ml-3">Numbers (123)</label>
+        </div>
+        <div className="flex items-center my-2">
+          <Checkbox
+            checked={options.symbols}
+            onChange={e => handleOptionsChange('symbols', e.target.checked)}
+          />
+          <label className="ml-3">Symbols (!#$)</label>
+        </div>
       </div>
     </Paper>
   );
