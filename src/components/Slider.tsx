@@ -18,7 +18,6 @@ const Slider = ({ minValue, maxValue, currentValue, onChange }: SliderProps) => 
         className="slider"
         onChange={e => onChange(e.target.value)}
       />
-      <div className="value">foo</div>
     </div>
   );
 };

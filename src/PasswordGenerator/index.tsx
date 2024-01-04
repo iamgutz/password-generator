@@ -10,7 +10,6 @@ import Checkbox from '../components/Checkbox';
 import Slider from '../components/Slider';
 
 export default function PasswordGenerator() {
-  const [sliderValue, setSliderValue] = useState(0);
   const [passwordLength, setPasswordLength] = useState('12');
   const [options, setOptions] = useState({
     uppercase: true,
@@ -95,8 +94,8 @@ export default function PasswordGenerator() {
         onRefresh={refreshPassword}
       />
 
-      <div className="px-4 md:px-10 my-3">
-        <p>Password Length:</p>
+      <div className="flex items-center px-4 md:px-10 my-3">
+        <p className="mr-2">Password Length:</p>
         <TextField
           type="number"
           className="text-black"
@@ -111,8 +110,6 @@ export default function PasswordGenerator() {
         currentValue={parseInt(passwordLength, 10)}
         onChange={handlePasswordLengthChange}
       />
-
-      <p>{sliderValue}</p>
 
       <div className="px-4 pb-4 md:px-10 md:pb-10">
         <p>Include:</p>
