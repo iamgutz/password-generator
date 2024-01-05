@@ -1,7 +1,11 @@
 {
   "name": "react-password-generator",
   "homepage": "https://iamgutz.github.io/react-password-generator",
-  "version": "0.1.0",
+  "author": {
+    "name": "Michael Gutierrez",
+    "url": "https://github.com/iamgutz"
+  },
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

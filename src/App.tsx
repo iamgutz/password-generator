@@ -4,7 +4,9 @@ import PasswordGenerator from './PasswordGenerator';
 function App() {
   return (
     <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center">
-      <PasswordGenerator />
+      <div className="w-full px-3 mx-auto md:max-w-3xl">
+        <PasswordGenerator />
+      </div>
     </div>
   );
 }

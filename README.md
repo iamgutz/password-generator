@@ -1,46 +1,75 @@
-# Getting Started with Create React App
+# React Password Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This React Password Generator app allows users to generate strong and secure passwords with various customizable options. Users can control the length of the password, include or exclude uppercase letters, lowercase letters, numbers, and special characters. The app provides instant feedback on password strength and visually represents it with different colors. Additionally, users can copy the generated password to the clipboard with a single click.
 
-## Available Scripts
+## Live Demo
 
-In the project directory, you can run:
+Visit the live demo [here](https://iamgutz.github.io/react-password-generator/).
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. Password Generation and Refreshing
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Upon loading the app, the input field contains a randomly generated password of eight characters.
+- Clicking the refresh button (icon) generates a new random password.
 
-### `npm test`
+### 2. Clipboard Copy Functionality
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Clicking the copy button copies the password to the clipboard.
+- A message indicating the password has been copied to the clipboard is displayed.
 
-### `npm run build`
+### 3. Customizable Password Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Users can check or uncheck checkboxes for uppercase letters, lowercase letters, numbers, and special characters.
+- Uppercase letters: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+- Lowercase letters: abcdefghijklmnopqrstuvwxyz
+- Numbers: 0123456789
+- Symbols: !@#$%^&\*()
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. Smart Default Configuration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- If all checkboxes are unchecked, the lowercase checkbox automatically becomes checked.
 
-### `npm run eject`
+### 5. Length-Based Security Assurance
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- If the password length is less than 8, the password strength message below the password input will be "Too short," displayed in red.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 6. Dynamic Password Security Assessment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Password strength is evaluated based on the following criteria:
+- Strong: Contains at least one uppercase letter, one lowercase letter, one number, and one special character.
+- Average: Missing one of the fields in the password.
+- Weak: Missing two of the fields in the password.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 7. Intuitive Password Strength Visualization
 
-## Learn More
+- Different colors represent password strength:
+- Weak: Red
+- Average: Orange
+- Strong: Green
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository:
+
+```bash
+   git clone https://github.com/iamgutz/react-password-generator.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd react-password-generator
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the app:
+
+```bash
+npm start
+```

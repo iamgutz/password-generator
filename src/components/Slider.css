@@ -1,32 +1,55 @@
-.slider {
-  position: relative;
-  width: 300px;
-  height: 20px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  overflow: hidden;
-}
+@tailwind components;
 
-.filled-background {
-  height: 100%;
-  background-color: #4caf50; /* Green color for the filled background */
-  transition: width 0.2s ease-out;
-  position: relative;
-}
+@layer components {
+  .slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    border-radius: 15px;
+    height: 6px;
+    background: #ccc;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background-color: #f50;
+    border-radius: 50%;
+    border: none;
+    transition: box-shadow 0.2s ease-in-out;
+    opacity: 1;
+  }
+  .slider::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #f50;
+    border-radius: 50%;
+    border: none;
+    transition: box-shadow 0.2s ease-in-out;
+    opacity: 1;
+  }
+  .slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 10px rgba(255, 85, 0, 0.1);
+  }
+  .slider:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 13px rgba(255, 85, 0, 0.2);
+  }
 
-.knob {
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border: 1px solid #4caf50; /* Border color matching the filled background */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  cursor: grab;
-}
+  .slider:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 13px rgba(255, 85, 0, 0.2);
+  }
 
-.empty-background {
-  height: 100%;
-  background-color: #e0e0e0; /* Light gray color for the empty background */
+  .slider::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 10px rgba(255, 85, 0, 0.1);
+  }
+  .slider:active::-moz-range-thumb {
+    box-shadow: 0 0 0 13px rgba(255, 85, 0, 0.2);
+  }
+  .slider:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 13px rgba(255, 85, 0, 0.2);
+  }
 }

@@ -7,6 +7,7 @@ import TextField from '../components/TextField';
 import PasswordDisplay from '../components/PasswordDisplay';
 import Checkbox from '../components/Checkbox';
 import Slider from '../components/Slider';
+import Alert from '../components/Alert';
 
 export default function PasswordGenerator() {
   const [passwordLength, setPasswordLength] = useState('12');
@@ -36,10 +37,13 @@ export default function PasswordGenerator() {
   };
 
   const handleOptionsChange = (optionName: string, value: boolean) => {
-    setOptions(prevOptions => ({
-      ...prevOptions,
-      [optionName]: value,
-    }));
+    setOptions(prevOptions => {
+      const newOptions = {
+        ...prevOptions,
+        [optionName]: value,
+      };
+      return optionsBoundary(newOptions);
+    });
   };
 
   const handleOnCopy = () => {
@@ -50,9 +54,10 @@ export default function PasswordGenerator() {
   };
 
   const refreshPassword = useCallback(() => {
+    const limitedOptions = optionsBoundary(options);
     const newPassword = generatePassword({
       length: parseInt(passwordLength, 10),
-      ...optionsBoundary(options),
+      ...limitedOptions,
     });
     setPassword(newPassword);
   }, [options, passwordLength]);
@@ -78,20 +83,27 @@ export default function PasswordGenerator() {
   return (
     <Paper>
       <div className="px-4 pt-4 pb-2 md:px-10 md:pt-10">
-        <h1 className="text-3xl font-bold text-center">Password Generator 2</h1>
+        <h1 className="text-3xl font-bold text-center">Password Generator</h1>
         <p className="text-center">Create a strong and secure password</p>
       </div>
 
-      <PasswordDisplay
-        password={password}
-        bgColorClass={strength.bgColorClass}
-        textColorClass={strength.textColorClass}
-        highlightColorClass={strength.highlightColorClass}
-        label={strength.label}
-        Icon={strength.icon}
-        onCopy={handleOnCopy}
-        onRefresh={refreshPassword}
-      />
+      <div className="relative">
+        <PasswordDisplay
+          password={password}
+          bgColorClass={strength.bgColorClass}
+          textColorClass={strength.textColorClass}
+          highlightColorClass={strength.highlightColorClass}
+          label={strength.label}
+          Icon={strength.icon}
+          onCopy={handleOnCopy}
+          onRefresh={refreshPassword}
+        />
+        {wasCopied && (
+          <Alert>
+            <p>Password copied to clipboard</p>
+          </Alert>
+        )}
+      </div>
 
       <div className="flex items-center px-4 md:px-10 my-3">
         <p className="mr-2">Password Length:</p>
@@ -103,12 +115,14 @@ export default function PasswordGenerator() {
         />
       </div>
 
-      <Slider
-        minValue={3}
-        maxValue={50}
-        currentValue={parseInt(passwordLength, 10)}
-        onChange={handlePasswordLengthChange}
-      />
+      <div className="px-4 md:px-10 mb-4">
+        <Slider
+          minValue={3}
+          maxValue={50}
+          currentValue={parseInt(passwordLength, 10)}
+          onChange={handlePasswordLengthChange}
+        />
+      </div>
 
       <div className="px-4 pb-4 md:px-10 md:pb-10">
         <p>Include:</p>

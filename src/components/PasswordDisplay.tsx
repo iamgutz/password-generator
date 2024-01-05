@@ -32,7 +32,7 @@ const PasswordDisplay = ({
   );
   return (
     <div className={classNames}>
-      <p className="text-2xl mb-3">{password}</p>
+      <p className="text-2xl mb-3 break-words">{password}</p>
       <div className="flex items-center justify-between">
         <div className={`${textColorClass} flex items-center`}>
           <Icon size={20} />

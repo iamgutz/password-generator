@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './Slider.css'; // Include your CSS file for styling
 
 interface SliderProps {
@@ -8,6 +9,23 @@ interface SliderProps {
 }
 
 const Slider = ({ minValue, maxValue, currentValue, onChange }: SliderProps) => {
+  const [progress, setProgress] = useState(0);
+
+  const updateProgress = (value: number) => {
+    const range = maxValue - minValue;
+    const newProgress = ((value - minValue) / range) * 100;
+    setProgress(newProgress);
+  };
+
+  const handleOnChange = (value: string) => {
+    onChange(value);
+    updateProgress(Number(value));
+  };
+
+  useEffect(() => {
+    updateProgress(currentValue);
+  });
+
   return (
     <div>
       <input
@@ -16,7 +34,10 @@ const Slider = ({ minValue, maxValue, currentValue, onChange }: SliderProps) => 
         max={maxValue}
         value={currentValue}
         className="slider"
-        onChange={e => onChange(e.target.value)}
+        onChange={e => handleOnChange(e.target.value)}
+        style={{
+          background: `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`,
+        }}
       />
     </div>
   );
