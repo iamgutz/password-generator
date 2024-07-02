@@ -4,7 +4,7 @@ This React Password Generator app allows users to generate strong and secure pas
 
 ## Live Demo
 
-Visit the live demo [here](https://iamgutz.github.io/react-password-generator/).
+Visit the live demo [here](https://iamgutz.github.io/password-generator/).
 
 ## Features
 
