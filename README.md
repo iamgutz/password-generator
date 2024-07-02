@@ -53,13 +53,13 @@ Visit the live demo [here](https://iamgutz.github.io/password-generator/).
 1. Clone the repository:
 
 ```bash
-   git clone https://github.com/iamgutz/react-password-generator.git
+   git clone https://github.com/iamgutz/password-generator.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd react-password-generator
+cd password-generator
 ```
 
 3. Install dependencies:

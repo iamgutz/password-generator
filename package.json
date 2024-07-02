@@ -1,6 +1,6 @@
 {
-  "name": "react-password-generator",
-  "homepage": "https://iamgutz.github.io/react-password-generator",
+  "name": "password-generator",
+  "homepage": "https://iamgutz.github.io/password-generator",
   "author": {
     "name": "Michael Gutierrez",
     "url": "https://github.com/iamgutz"
