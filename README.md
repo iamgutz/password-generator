@@ -1,6 +1,10 @@
-# React Password Generator
+# Password Generator
 
 This React Password Generator app allows users to generate strong and secure passwords with various customizable options. Users can control the length of the password, include or exclude uppercase letters, lowercase letters, numbers, and special characters. The app provides instant feedback on password strength and visually represents it with different colors. Additionally, users can copy the generated password to the clipboard with a single click.
+
+## Screenshot
+
+![Screenshot](./screenshots/screenshot-1.png)
 
 ## Live Demo
 
@@ -21,10 +25,10 @@ Visit the live demo [here](https://iamgutz.github.io/password-generator/).
 ### 3. Customizable Password Components
 
 - Users can check or uncheck checkboxes for uppercase letters, lowercase letters, numbers, and special characters.
-- Uppercase letters: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-- Lowercase letters: abcdefghijklmnopqrstuvwxyz
-- Numbers: 0123456789
-- Symbols: !@#$%^&\*()
+- Uppercase letters: **ABCDEFGHIJKLMNOPQRSTUVWXYZ**
+- Lowercase letters: **abcdefghijklmnopqrstuvwxyz**
+- Numbers: **0123456789**
+- Symbols: **!@#$%^&\*()**
 
 ### 4. Smart Default Configuration
 
@@ -37,25 +41,20 @@ Visit the live demo [here](https://iamgutz.github.io/password-generator/).
 ### 6. Dynamic Password Security Assessment
 
 - Password strength is evaluated based on the following criteria:
-- Strong: Contains at least one uppercase letter, one lowercase letter, one number, and one special character.
-- Average: Missing one of the fields in the password.
-- Weak: Missing two of the fields in the password.
+- **Strong**: Contains at least one uppercase letter, one lowercase letter, one number, and one special character.
+- **Average**: Missing one of the fields in the password.
+- **Weak**: Missing two of the fields in the password.
 
 ### 7. Intuitive Password Strength Visualization
 
 - Different colors represent password strength:
-- Weak: Red
-- Average: Orange
-- Strong: Green
+- Weak: **Red**
+- Average: **Orange**
+- Strong: **Green**
 
 # Getting Started
 
-1. Clone the repository:
-
-```bash
-   git clone https://github.com/iamgutz/password-generator.git
-```
-
+1. Clone the repository.
 2. Navigate to the project directory:
 
 ```bash
